@@ -1,7 +1,7 @@
 📘 README.md
 Despliegue automático de aplicación Spring Boot en servidor Linux
 
-Este proyecto incluye un script (deploy.sh) que permite desplegar automáticamente una aplicación Java Spring Boot en un servidor Linux.
+Este proyecto incluye un script (deploy.sh) que permite desplegar automáticamente una aplicación Java Spring Boot (webapp.sh) en un servidor Linux.
 El despliegue incluye:
 
 Descompresión del proyecto
@@ -16,7 +16,7 @@ Compilación con Gradle
 
 Creación y activación del servicio systemd
 
-Ejecución en HTTP (sin HTTPS) en el puerto 9090 (o el que configures)
+Ejecución en HTTP (sin HTTPS) en el puerto 9090 (o el que se desee configurando el script)
 
 🚀 Requisitos
 
@@ -26,20 +26,26 @@ Tener un sistema operativo Ubuntu 22.04
 
 Contar con un usuario con permisos sudo (en este script: isard)
 
-Haber subido el archivo webapp.zip al directorio: /home/isard/imw-vps-gowebapp/
+Comprobar que el archivo webapp.zip esta subido en el directorio: /home/isard/imw-vps-gowebapp/
 
-El webapp.zip debe contener un proyecto Spring Boot generado desde "https://start.spring.io/" con la siguiente configuracion:
+El webapp.zip contiene el proyecto Spring Boot, este mismo fue generado desde "https://start.spring.io/" con la siguiente configuracion:
 
 Configuración:
 
 ● Project: Maven
+
 ● Language: Java
+
 ● Spring Boot: 3.4.11
+
 ● Group: com.example
+
 ● Artifact: webapp
+
 ● Dependencies:
-○ Spring Web
-○ Thymeleaf (para vistas HTML dinámicas)
+ ○ Spring Web
+
+ ○ Thymeleaf (para vistas HTML dinámicas)
 
 <img width="1133" height="595" alt="image" src="https://github.com/user-attachments/assets/cda1e7c0-9038-45e4-8bd9-3fc1758e0f5e" />
 
@@ -60,30 +66,20 @@ El script realiza las siguientes acciones:
 
 ✔ Instalación de dependencias
 
-Java OpenJDK 17
-
-unzip
+Java OpenJDK 17 y unzip
 
 ✔ Preparación del proyecto
 
-Elimina despliegues anteriores
-
-Descomprime webapp.zip
-
-Crea la estructura necesaria
+Elimina despliegues anteriores, descomprime webapp.zip y crea la estructura necesaria
 
 ✔ Configura el puerto HTTP en application.properties
 ✔ Genera dos plantillas Thymeleaf:
 
-index.html
-
-contacto.html
+index.html y contacto.html
 
 ✔ Crea un controlador:
 
-/ → página inicial con datos dinámicos
-
-/contacto → formulario con Bootstrap
+/ → página inicial con datos dinámicos y /contacto → formulario con Bootstrap
 
 ✔ Compila con Gradle (./gradlew build)
 ✔ Crea servicio systemd:
